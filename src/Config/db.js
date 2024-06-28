@@ -1,14 +1,11 @@
 import mongoose from "mongoose";
 
-function Dbconnect(){
+function Dbconnect() {
+  if (mongoose.connection >= 1) {
+    return;
+  }
 
-    if(mongoose.connection >= 1){
-        console.log("already connected")
-        return
-    }
-
-    mongoose.connect("mongodb://127.0.0.1:27017/blg")
+  mongoose.connect("mongodb://127.0.0.1:27017/Blogs");
 }
-
 
 export default Dbconnect;

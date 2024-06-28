@@ -1,12 +1,20 @@
 import mongoose from "mongoose";
 
-const blogSchemee = new mongoose.Schema({
-  username: {
+const UserScheme = new mongoose.Schema({
+  Username: {
     type: String,
+    required:[true,"Enter the User Name"]
   },
-  fathername: {
+  Emai: {
     type: String,
+    required:[true,"Enter the Email"]
   },
+  Password: {
+    type: String,
+    required:[true,"Enter the Password"]
+  },
+},{
+  timestamps:true
 });
 
-export default mongoose.models?.user || mongoose.model("user", blogSchemee);
+export default mongoose.models?.User || mongoose.model("User", UserScheme);
