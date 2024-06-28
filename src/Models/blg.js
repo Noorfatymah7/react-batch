@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const blogScheme = new mongoose.Schema({
-  fullname: {
+  schoolname: {
     type: String,
   },
-  lastname: {
+  collegename: {
     type: String,
   },
 });
 
-export default mongoose.models?.blog || mongoose.model("blog", blogScheme);
+export default mongoose.models?.blg || mongoose.model("blg", blogScheme);
