@@ -30,9 +30,16 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function GET(req, params) {
+  const { searchParams } = new URL(req.url);
+  const param = searchParams.get("filter");
+  console.log(param);
   try {
-    const res = await Blog.find();
+    let match = param && {
+      [param]: true,
+    };
+
+    const res = await Blog.find(match);
     return NextResponse.json(
       {
         success: true,

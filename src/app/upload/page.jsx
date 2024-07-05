@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import axios from "axios";
+import { CldUploadWidget } from "next-cloudinary";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const inputs = [
@@ -11,41 +13,80 @@ const inputs = [
     type: "select",
     options: ["News", "Sports", "Technologise"],
   },
-
+  {
+    placeholder: "Featured",
+    name: "isFeatured",
+    type: "select",
+    options: [
+      { text: "false", value: false },
+      { text: "true", value: true },
+    ],
+  },
   { placeholder: "Discription", name: "Description", type: "textarea" },
-  { placeholder: "Featured", name: "isFeatured", type: "checkbox" },
-  { placeholder: "Image", name: "Images", type: "file" },
 ];
 
-const page = () => {
-  const [form, setForm] = useState({});
+const page = ({ searchParams }) => {
+  console.log(searchParams);
+  const [img, setImg] = useState("");
+  const [form, setForm] = useState({
+    Title: "",
+    Description: "",
+  });
   const [loading, setLoading] = useState(false);
 
   function handler(e) {
     const { name, value } = e.target;
     if (name == "isFeatured") {
       setForm({ ...form, [name]: true });
-      return
+      return;
     }
     setForm({ ...form, [name]: value });
   }
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
-    console.log(form);
+    let formdata = { ...form, Images: img };
+    console.log(formdata);
     setLoading(true);
-    setInterval(() => {
+    try {
+      const { data } = await axios.post("/api/blogs", formdata);
+      if (!data.success) {
+        toast.error(data.message);
+        return;
+      }
+      toast.success("Your Blog Have Been Submittted!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Somthing went wrong");
+    } finally {
       setLoading(false);
-    }, 3000);
-    toast.success("Your Blog Have Been Submittted!");
+    }
   }
 
+  async function Getone() {
+    try {
+      const { data } = await axios.get(`/api/blogs/${searchParams.id}`);
+      if (!data.success) {
+        toast.error(data.message);
+        return;
+      }
+      toast.success("Your Blog Have Been Submittted!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Somthing went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    Getone();
+  }, []);
   return (
     <div className="flex justify-center items-center">
       <Toaster position="bottom-right" reverseOrder={false} />
       <form
         onSubmit={submit}
-        className="bg-blue-400/40 rounded-lg space-y-4 py-4 px-6 max-w-[600px] shadow-md"
+        className="rounded-lg space-y-4 py-4 px-6 max-w-[600px] shadow-md"
       >
         {/* Header of the form ===================================== */}
         <div>
@@ -60,7 +101,7 @@ const page = () => {
           </p>
         </div>
         {/* Inputs of the from ================================ */}
-        <div className="grid grid-cols-2 gap-3 [&>*:nth-child(1)]:col-span-2 [&>*:nth-child(5)]:flex-row-reverse [&>*:nth-child(5)]:items-center [&>*:nth-child(5)]:justify-center">
+        <div className="grid grid-cols-2 gap-3 [&>*:nth-child(1)]:col-span-2 [&>*:nth-child(2)]:col-span-2  [&>*:nth-child(5)]:col-span-2 [&>*:nth-child(5)]:justify-center">
           {inputs.map((v, i) => (
             <div key={i} className="flex flex-col">
               <label htmlFor={i}>{v.placeholder}</label>
@@ -68,29 +109,60 @@ const page = () => {
                 <select
                   disabled={loading}
                   name={v.name}
+                  required
                   onChange={handler}
-                  className="py-2 rounded-md"
+                  className="py-2 px-1 rounded-md outline outline-1 outline-gray-500"
                 >
-                  <option value="News">News</option>
-                  <option value="Events">Events</option>
-                  <option value="Sports">Sports</option>
-                  <option value="Gaming">Gaming</option>
+                  <option disabled selected value="">
+                    Catagory
+                  </option>
+                  {v?.options?.map((v, i) => (
+                    <option key={i} value={v?.value ? v.value : v}>
+                      {v.text ? v.text : v}
+                    </option>
+                  ))}
                 </select>
               ) : v.type == "textarea" ? (
-                <textarea />
+                <textarea
+                  disabled={loading}
+                  onChange={handler}
+                  name={v.name}
+                  required
+                  className="outline outline-1 outline-gray-500 w-full rounded py-2 px-1 block"
+                  placeholder={v.placeholder}
+                />
               ) : (
                 <input
                   id={i}
                   disabled={loading}
                   onChange={handler}
                   name={v.name}
-                  className="px-2 py-2 rounded-md"
+                  required
+                  className="px-2 py-2 rounded-md outline outline-1 outline-gray-500"
                   type={v.type}
                   placeholder={v.placeholder}
                 />
               )}
             </div>
           ))}
+          <CldUploadWidget
+            uploadPreset="mhubslt3"
+            onSuccess={(results) => {
+              setImg(results.info.secure_url);
+            }}
+          >
+            {({ open }) => {
+              return (
+                <button
+                  className="bg-blue-600 py-2 px-4 rounded-xl text-white"
+                  type="button"
+                  onClick={() => open()}
+                >
+                  Upload an Image
+                </button>
+              );
+            }}
+          </CldUploadWidget>
         </div>
         <div className="flex justify-end gap-3 items-center">
           <button
