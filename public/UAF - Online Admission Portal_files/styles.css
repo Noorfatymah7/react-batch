@@ -1,0 +1,286 @@
+.stag{
+  position:relative;
+  width:100%;
+  height:500px;
+  top:-5px;
+}
+
+.stag img{
+  width:100%;
+  height:500px;
+}
+
+.stag .ImgOverlay{
+  position:absolute;
+  margin:auto;
+  min-width:50%;
+  min-height:50%;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  opacity:1;
+}
+
+@media (max-width:991px) {
+  .stag .ImgOverlay{
+    position:absolute;
+    margin:auto;
+    min-width:50%;
+    min-height:50%;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    opacity:1;
+    visibility:hidden;
+  }
+}
+
+.footer{
+  position:inherit;
+  background-color:rgb(25,142,13);
+  height:65px;
+  padding:15px;
+  color:white;
+}
+
+.login-content{
+  position:absolute;
+  left:20px;
+  top:30px;
+  width:420px;
+}
+
+@media (max-width:991px) {
+  .login-content{
+    position:absolute;
+    left:20px;
+    top:30px;
+    width:320px;
+  }
+}
+
+.logo{
+  width:20px;
+  height:20px;
+  position:absolute;
+  top:20px;
+}
+
+.heading{
+  font-size:20px;
+  font-weight:100;
+  color:rgb(25,142,13);
+}
+
+@media (max-width:991px) {
+  .heading{
+    font-size:20px;
+    font-weight:100;
+    color:rgb(25,142,13);
+    visibility:hidden;
+  }
+}
+
+.heading1{
+  font-size:25px;
+  font-weight:100;
+  color:rgb(25,142,13);
+}
+
+@media (max-width:991px) {
+  .heading1{
+    font-size:25px;
+    font-weight:100;
+    color:rgb(25,142,13);
+    visibility:hidden;
+  }
+}
+
+.heading2{
+  font-size:15px;
+  font-weight:100;
+  color:rgb(146,12,4);
+  text-align:justify;
+}
+
+@media (max-width:991px) {
+  .heading2{
+    font-size:15px;
+    font-weight:100;
+    color:rgb(146,12,4);
+    text-align:justify;
+  }
+}
+
+.header{
+  width:100%;
+  padding-top:30px;
+  padding-bottom:0px;
+  padding-left:50px;
+  padding-right:50px;
+  position:fixed;
+  top:60px;
+}
+
+.login-form{
+  margin-top:30px;
+}
+
+.usericon{
+  color:rgb(25,142,13);
+  align-content:center;
+}
+
+.userinput{
+  padding-right:60px;
+  border:0;
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+  border-color:rgb(25,142,13);
+  color:rgb(25,142,13);
+  margin-left:10px;
+}
+
+.myBtn{
+  color:white;
+  background-color:rgb(25,142,13);
+  width:60px;
+  border:0;
+  padding:7px;
+  margin-top:10px;
+}
+
+.myBtnSignup{
+  color:white;
+  background-color:#f4476b;
+  width:100%;
+  border:0;
+  padding:7px;
+  margin-top:10px;
+}
+
+.ErrorMessage{
+  color:red;
+  padding-left:10px;
+}
+
+.right-footer{
+  text-align:right;
+}
+
+.left-footer{
+  text-align:left;
+}
+
+.copyright{
+  text-align:center;
+  font-size:smaller;
+}
+
+.UAFLogo{
+  width:37px;
+  height:auto;
+}
+
+.container{
+  padding-right:15px;
+  padding-left:15px;
+  padding-bottom:15px;
+  margin-right:auto;
+  margin-left:auto;
+  width:100%;
+}
+
+.midColumn{
+  border-left:1pt;
+  border-right:1pt;
+  border-left-style:dotted;
+  border-right-style:dotted;
+  border-color:rgb(150,143,143);
+}
+
+.ColumnSpliter{
+  border-right:1pt;
+  border-right-style:dotted;
+  border-color:rgb(150,143,143);
+}
+
+.ColumnSpliterSolid{
+  border-right:1pt;
+  border-right-style: solid;
+  border-color:rgb(150,143,143);
+    top: 0px;
+    bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.panel-default > .panel-heading{
+  color:#333;
+  background-color:#198e0d;
+  border-color:#ddd;
+}
+
+.panel-success > .panel-heading{
+  color:#ffffff;
+  background-color:#198e0d;
+  border-color:#d6e9c6;
+  background-image:none;
+}
+
+.panel-success{
+  border-color:#198e0d;
+}
+
+.UserImageRow{
+  text-align:center;
+}
+
+.UserImage{
+  width:150px;
+  height:150px;
+  margin-bottom:10px;
+}
+
+.UserInfoRow{
+  border-bottom:1pt;
+  border-bottom-style:solid;
+  border-bottom-color:rgb(25,142,13);
+  padding-bottom:5px;
+  padding-top:5px;
+}
+
+.UserInfoRowLast{
+  padding-top:5px;
+}
+
+.jumbotron{
+  padding-top:30px;
+  padding-bottom:30px;
+  margin-bottom:30px;
+  color:inherit;
+  background-color:#f4f1f1;
+  text-align:center;
+  color:rgb(25,142,13);
+}
+.popover {
+    width: 100%;
+}
+.popover-title{
+    background: rgb(25,142,13);
+    color: white;
+}
+.btn-product{
+	width: 100%;
+}
+.bottomLine{
+  border-bottom:2px;
+  border-bottom-style:solid;
+  border-color:rgb(239,239,239);
+}
+
+
+
+
